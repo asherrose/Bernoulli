@@ -1,0 +1,45 @@
+import java.util.LinkedList;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.stage.Stage;
+
+public class Chart extends Application{
+	static LinkedList<TossResult> regResult=new LinkedList<TossResult>();
+	static LinkedList<TossResult> bernResult=new LinkedList<TossResult>();
+	public void start (Stage stage){
+		regResult=Main.regResults;
+		bernResult=Main.bernResults;
+		stage.setTitle("Average Winnings");
+		final NumberAxis xAxis=new NumberAxis();
+		final NumberAxis yAxis=new NumberAxis();
+		xAxis.setLabel("Tosses");
+		yAxis.setLabel("Average won");
+		final LineChart<Number, Number> lineChart=new LineChart<Number, Number>(xAxis,yAxis);
+		lineChart.setTitle("Chart of winnings");
+		XYChart.Series<Number,Number> series1=new XYChart.Series<Number,Number>();
+		series1.setName("Regular Winnings");
+		for (int i=0; i<regResult.size(); i++){
+			double x= regResult.get(i).getTossNum();
+			double y= regResult.get(i).getWin();
+		series1.getData().add(new XYChart.Data<Number, Number>(x,y));//add winnings of regular game
+		}
+		XYChart.Series<Number,Number> series2=new XYChart.Series<Number,Number>();
+		series2.setName("Bernoulli Winnings");
+		for (int i=0; i<bernResult.size(); i++){
+			double x= bernResult.get(i).getTossNum();
+			double y= bernResult.get(i).getWin();
+			series2.getData().add(new XYChart.Data<Number, Number>(x,y));//add winnings of bernoulli game
+		}
+		Scene scene=new Scene(lineChart,800,600);
+		lineChart.getData().addAll(series1,series2);
+		stage.setScene(scene);
+		stage.show();
+	}
+	public static void main(String[] args) {
+        Application.launch(args);
+    }
+}
