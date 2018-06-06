@@ -1,0 +1,27 @@
+import java.util.LinkedList;
+
+import javafx.application.Application;
+
+public class Main {
+	
+	static int winnings=0;
+	static int bernWinnings=0;
+	static LinkedList<TossResult> regResults=new LinkedList<TossResult>();
+	static LinkedList<TossResult> bernResults=new LinkedList<TossResult>();
+	public static void main(String[] args) {
+		int tosses=100;
+		
+		for (double i=1.0; i<=tosses; i++){//simulate 100 tosses
+			CoinToss toss=new CoinToss();
+
+			TossResult rToss=new TossResult(i,winnings/i);//simulate regular game
+			regResults.add(rToss);
+			BernCoinToss bernToss=new BernCoinToss();//simulate bernoulli game
+			TossResult bToss=new TossResult(i,bernWinnings/i);
+			bernResults.add(bToss);
+		}
+		Chart.launch(Chart.class);//launch chart
+		
+	
+	}
+}
