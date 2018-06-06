@@ -1,0 +1,14 @@
+public class TossResult {
+	private double tossNum;
+	private double win;
+	public TossResult (double a, double b){
+		tossNum=a;
+		win=b;
+	}
+	public double getTossNum(){
+		return tossNum;
+	}
+	public double getWin(){
+		return win;
+	}
+}
