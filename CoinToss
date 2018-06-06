@@ -1,0 +1,13 @@
+import java.util.Random;
+
+public class CoinToss {
+	private int result;
+	Random randomNum=new Random(); 
+	public CoinToss (){
+		result=randomNum.nextInt(2);
+		if (result==0){//heads 0, tails 1
+			Main.winnings++;
+		}
+	}
+
+}
